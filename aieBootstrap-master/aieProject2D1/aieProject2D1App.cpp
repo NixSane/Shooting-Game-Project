@@ -24,6 +24,7 @@ bool aieProject2D1App::startup() {
 	m_sunny_road = new aie::Texture("./textures/background_sunny.png");
 	m_world_track = new aie::Texture("./textures/bg_world_track.png");
 	m_ship = new aie::Texture("./textures/ship_2 - Copy.png");
+	m_bullet = new aie::Texture("./textures/bullet.png");
 
 	m_timer = 0;
 
@@ -36,6 +37,8 @@ void aieProject2D1App::shutdown() {
 	delete m_2dRenderer;
 	delete m_faceTexture;
 	delete m_ship;
+	delete m_world_track;
+	delete m_bullet;
 }
 
 void aieProject2D1App::update(float deltaTime) {
@@ -45,13 +48,16 @@ void aieProject2D1App::update(float deltaTime) {
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
+	// Mouse rotation
 
-	// Car rotation
+	// Ship rotation
 	float s = sinf(rotation) * speed;
 	float c = cosf(rotation) * speed;
 	x -= s * deltaTime;
 	y += c * deltaTime;
 
+
+	
 
 	//// Set camera to player
 	//float cam_posX;
@@ -92,16 +98,12 @@ void aieProject2D1App::update(float deltaTime) {
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		/*playerPosX -= 100.0f * deltaTime;*/
 		rotation += 0.05;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		rotation -= 0.05;
-
-		/*playerPosX += 100.0f * deltaTime;
-		m_timer += 2.0f * deltaTime;*/
 	}
 
 	/*m_2dRenderer->setCameraPos(cam_posX, cam_posY);*/
@@ -122,6 +124,7 @@ void aieProject2D1App::draw() {
 	m_2dRenderer->begin();
 
 	// draw your stuff here!
+
 
 	// Background
 	m_2dRenderer->drawSprite(m_world_track, 0, 0, 1280, 720, 0, 50, 0, 0); 

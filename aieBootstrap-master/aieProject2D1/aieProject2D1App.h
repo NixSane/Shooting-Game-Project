@@ -34,6 +34,7 @@ protected:
 	aie::Texture*		m_background;
 	aie::Texture*		m_sunny_road;
 	aie::Texture*		m_world_track;
+	aie::Texture*		m_bullet;
 
 	//float max_speed = 50;
 	float m_timer;
