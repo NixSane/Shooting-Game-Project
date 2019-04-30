@@ -21,12 +21,7 @@ public:
 	float x = 200.0f, y = 200.0f;
 	float rotation = 0;
 	float speed = 0;
-	float mouse_x = 0.0f, mouse_y = 0.0f;
-
-	// Bullet variables
-	float bullet_spd = 800.0f;
-
-	int bullet_limit = 10;
+	
 
 protected:
 
@@ -39,6 +34,6 @@ protected:
 	aie::Texture*		m_world_track;
 	aie::Texture*		m_bullet;
 
-	//float max_speed = 50;
+	
 	float m_timer;
 };
