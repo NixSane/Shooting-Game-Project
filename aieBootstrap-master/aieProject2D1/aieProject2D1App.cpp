@@ -48,7 +48,13 @@ void aieProject2D1App::update(float deltaTime) {
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
-	// Mouse rotation
+	//// Mouse rotation
+	//mouse_x = input->getMouseX();
+	//mouse_y = input->getMouseY();
+	//float mouse_xy = mouse_x / mouse_y;
+
+	//float angle = tanf(mouse_xy);
+	//rotation = angle;
 
 	// Ship rotation
 	float s = sinf(rotation) * speed;
@@ -131,7 +137,7 @@ void aieProject2D1App::draw() {
 
 	// Sprite
 	m_2dRenderer->setUVRect(0, 0, 1, 1);
-	m_2dRenderer->drawSprite(m_ship, x, y, 127, 130, rotation, 1);
+	m_2dRenderer->drawSprite(m_ship, x, y, 127, 130, rotation, 1, 0.5f, 0.3f);
 	//m_2dRenderer->drawSpriteTransformed3x3(m_faceTexture, 3.0f, playerPosX, playerPosY, 36, 42, 0, 0, 0, 0);
 
 

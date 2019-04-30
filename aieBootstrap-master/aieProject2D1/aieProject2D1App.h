@@ -21,6 +21,7 @@ public:
 	float x = 200.0f, y = 200.0f;
 	float rotation = 0;
 	float speed = 0;
+	float mouse_x = 0.0f, mouse_y = 0.0f;
 
 	
 	
