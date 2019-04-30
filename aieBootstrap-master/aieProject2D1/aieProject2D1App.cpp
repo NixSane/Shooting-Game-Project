@@ -61,9 +61,12 @@ void aieProject2D1App::update(float deltaTime) {
 	float c = cosf(rotation) * speed;
 	x -= s * deltaTime;
 	y += c * deltaTime;
-
-
 	
+	// Bullet spawn
+	bool is_shooting = false;
+	float cooldown = 0.3f;
+	float shoot_delay = 0.1f;
+	shoot_delay += shoot_delay * deltaTime;
 
 	//// Set camera to player
 	//float cam_posX;
@@ -110,6 +113,15 @@ void aieProject2D1App::update(float deltaTime) {
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		rotation -= 0.05;
+	}
+
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE) && shoot_delay > cooldown)
+	{
+		is_shooting = true;
+		if (is_shooting)
+		{
+			m_bullet.push_back
+		}
 	}
 
 	/*m_2dRenderer->setCameraPos(cam_posX, cam_posY);*/

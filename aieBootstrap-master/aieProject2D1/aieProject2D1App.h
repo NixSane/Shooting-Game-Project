@@ -23,8 +23,10 @@ public:
 	float speed = 0;
 	float mouse_x = 0.0f, mouse_y = 0.0f;
 
-	
-	
+	// Bullet variables
+	float bullet_spd = 800.0f;
+
+	int bullet_limit = 10;
 
 protected:
 

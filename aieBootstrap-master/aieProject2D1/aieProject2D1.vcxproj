@@ -165,10 +165,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="aieProject2D1App.cpp" />
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aieProject2D1App.h" />
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
