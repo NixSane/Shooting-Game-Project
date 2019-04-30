@@ -14,6 +14,10 @@ public:
 	void set_cooldown(float a_cooldown);
 	void set_shooting(bool a_shooting);
 
+	float get_cooldown() const;
+	float get_delay() const;
+	bool get_shooting() const;
+
 protected:
 
 	bool is_shooting;

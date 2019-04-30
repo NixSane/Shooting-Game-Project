@@ -40,3 +40,18 @@ void bullet::set_cooldown(float a_cooldown)
 {
 	m_cooldown = a_cooldown;
 }
+
+float bullet::get_cooldown() const
+{
+	return m_cooldown;
+}
+
+float bullet::get_delay() const
+{
+	return m_delay;
+}
+
+bool bullet::get_shooting() const
+{
+	return is_shooting;
+}

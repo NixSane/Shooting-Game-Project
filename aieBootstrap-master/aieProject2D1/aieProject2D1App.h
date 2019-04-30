@@ -34,6 +34,7 @@ protected:
 	aie::Texture*		m_world_track;
 	aie::Texture*		m_bullet;
 
+	game_objects*		m_projectile;
 	
 	float m_timer;
 };

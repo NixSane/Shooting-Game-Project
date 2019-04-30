@@ -56,7 +56,7 @@ void aieProject2D1App::update(float deltaTime) {
 	y += c * deltaTime;
 	
 	// Bullet spawn
-	
+	m_projectile = new bullet::bullet();
 
 	
 
@@ -101,14 +101,14 @@ void aieProject2D1App::update(float deltaTime) {
 		rotation -= 0.05f;
 	}
 
-	//if (input->isKeyDown(aie::INPUT_KEY_SPACE) && shoot_delay > cooldown)
-	//{
-	//	is_shooting = true;
-	//	if (is_shooting)
-	//	{
-	//		
-	//	}
-	//}
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE) && m_delay > cooldown)
+	{
+		is_shooting = true;
+		if (is_shooting)
+		{
+			
+		}
+	}
 
 	/*m_2dRenderer->setCameraPos(cam_posX, cam_posY);*/
 	
