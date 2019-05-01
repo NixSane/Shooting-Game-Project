@@ -5,20 +5,14 @@
 bullet::bullet()
 {
 	// Default
-	
 	m_delay = 20.0f;
-	is_shooting = false;
+	m_is_shooting = false;
 	m_cooldown = 5.0f;
 }
 
-bullet::bullet(bool a_shoot, float a_delay, float delay, float a_cooldown) :
-	is_shooting(a_shoot), m_delay(a_delay), m_cooldown(a_cooldown)
+bullet::bullet(bool a_shoot, float a_delay, float a_cooldown) :
+	m_is_shooting(a_shoot), m_delay(a_delay), m_cooldown(a_cooldown)
 {
-	// Default
-	
-	m_delay = a_delay;
-	is_shooting = a_shoot;
-	m_cooldown = a_cooldown;
 }
 
 bullet::~bullet()
@@ -27,7 +21,7 @@ bullet::~bullet()
 
 void bullet::set_shooting(bool a_shooting)
 {
-	is_shooting = a_shooting;
+	m_is_shooting = a_shooting;
 }
 
 
@@ -53,5 +47,5 @@ float bullet::get_delay() const
 
 bool bullet::get_shooting() const
 {
-	return is_shooting;
+	return m_is_shooting;
 }

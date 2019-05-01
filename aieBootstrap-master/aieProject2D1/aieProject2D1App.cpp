@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "bullet.h"
 
+
 aieProject2D1App::aieProject2D1App() {
 
 }
@@ -27,6 +28,9 @@ bool aieProject2D1App::startup() {
 	m_ship = new aie::Texture("./textures/ship_2 - Copy.png");
 	m_bullet = new aie::Texture("./textures/bullet.png");
 
+	m_player = new game_objects(m_ship);
+	m_projectile = new game_objects(m_bullet);
+
 	m_timer = 0;
 
 	return true;
@@ -44,79 +48,92 @@ void aieProject2D1App::shutdown() {
 
 void aieProject2D1App::update(float deltaTime) {
 
-	/*m_timer += deltaTime;*/
+	m_timer += deltaTime;
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
-	// Ship rotation
-	float s = sinf(rotation) * speed;
-	float c = cosf(rotation) * speed;
-	x -= s * deltaTime;
-	y += c * deltaTime;
+	// Ship movement numbers
+	float player_x = m_player->get_position_x();
+	float player_y = m_player->get_position_y();
+	float player_rot = m_player->get_rotation();
+
 	
-	// Bullet spawn
-	m_projectile = new bullet::bullet();
+
+	float player_speed = 0;
+
+	float s = sinf(player_rot) * player_speed;
+	float c = cosf(player_rot) * player_speed;
+	x = s * deltaTime;
+	y = c * deltaTime;
+
+	const float pi = 3.14158f;
+
+	/*    Bullet Stuff Start */
+
+	/*if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+
+	}
+	*/
+	/*    Bullet stuff end    */
 
 	
 
 	// Direction inputs
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		while (speed < 500)
+		while (player_speed < 500)
 		{
-			speed += 30;
-			if (speed > 500)
+			player_speed += 50;
+			if (player_speed > 500)
 			{
-				speed = 500;
+				player_speed = 500;
 			}
 		}
 	}
-	else if (speed > 0)
+	else
 	{
-		speed -= 5;
-		if (speed < 0)
+		while (player_speed > 0) 
 		{
-			speed = 0;
+			player_speed -= 5;
+			if (player_speed < 0)
+			{
+				player_speed = 0;
+			}
 		}
 	}
+	
 
 	if (input->isKeyDown(aie::INPUT_KEY_S) && speed > 0)
 	{
-			speed -= 20;
-			if (speed < 0)
+		if (player_speed > 0)
+		{
+			player_speed -= 25;
+			if (player_speed < 0)
 			{
-				speed = 0;
+				player_speed = 0;
 			}
+		}
 	}
 	
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		rotation += 0.05f;
+		player_rot += pi * deltaTime;
 	}
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-		rotation -= 0.05f;
+		player_rot += -pi * deltaTime;
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE) && m_delay > cooldown)
-	{
-		is_shooting = true;
-		if (is_shooting)
-		{
-			
-		}
-	}
 
 	/*m_2dRenderer->setCameraPos(cam_posX, cam_posY);*/
 	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
-
-	
 }
 
 void aieProject2D1App::draw() {
@@ -135,10 +152,10 @@ void aieProject2D1App::draw() {
 
 	// Sprite
 	m_2dRenderer->setUVRect(0, 0, 1, 1);
-	m_2dRenderer->drawSprite(m_ship, x, y, 127, 130, 0, rotation, 0.5f, 0.3f);
-	//m_2dRenderer->drawSpriteTransformed3x3(m_faceTexture, 3.0f, playerPosX, playerPosY, 36, 42, 0, 0, 0, 0);
 
-
+	m_player->draw(m_2dRenderer);
+	//m_2dRenderer->drawSprite(m_ship, x, y, 127, 130, rotation, 0, 0.5f, 0.3f);
+	
 	/* m_2dRenderer->drawLine(100, 100, 200, 200, 5, 5); */
 	
 	// output some text, uses the last used colour

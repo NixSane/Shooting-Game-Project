@@ -1,11 +1,11 @@
 #pragma once
 #include "game_objects.h"
 
-class bullet
+class bullet 
 {
 public:
 	bullet();
-	bullet(bool a_shoot, float a_delay, float delay, float a_cooldown);
+	bullet(bool a_shoot, float a_delay, float a_cooldown);
 	~bullet();
 
 	
@@ -20,7 +20,7 @@ public:
 
 protected:
 
-	bool is_shooting;
+	bool m_is_shooting;
 	float m_cooldown;
 	float m_delay;
 };

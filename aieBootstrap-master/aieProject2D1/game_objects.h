@@ -1,28 +1,37 @@
 #pragma once
 
+namespace aie 
+{
+	class Texture;
+	class Renderer2D;
+}
 
 class game_objects
 {
 public:
-	game_objects();
-	~game_objects();
-
-	void set_speed(float a_speed);
+	game_objects(aie::Texture* const a_texture);
+	
+	
 	void set_rotation(float a_rot);
 	void set_position(float a_x, float a_y);
 	void set_radius(float a_radius);
+	
 
-	float get_speed() const;
 	float get_rotation() const;
-	float get_position() const;
+	float get_position_x() const;
+	float get_position_y() const;
 	float get_radius() const;
+	
 
-protected:
+	void draw(aie::Renderer2D* a_renderer);
 
-	float rotation;
-	float speed;
-	float position_x;
-	float position_y;
-	float m_radius;
+private:
+
+	float m_rotation = 0.0f;
+	float m_position_x = 0.0f;
+	float m_position_y = 0.0f;
+	float m_radius = 0.0f;
+
+	aie::Texture* m_texture = nullptr;
 };
 
