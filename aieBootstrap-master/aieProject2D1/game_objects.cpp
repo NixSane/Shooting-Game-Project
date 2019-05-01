@@ -2,9 +2,6 @@
 #include "Renderer2D.h"
 #include "Texture.h"
 
-
-
-
 game_objects::game_objects(aie::Texture* const a_texture)
 {
 	m_texture = a_texture;
@@ -28,7 +25,6 @@ void game_objects::set_radius(float a_radius)
 {
 	m_radius = a_radius;
 }
-
 
 			// Getters //
 
@@ -54,7 +50,7 @@ float game_objects::get_radius() const
 
 void game_objects::draw(aie::Renderer2D* a_renderer)
 {
-	a_renderer->drawSprite(m_texture, m_position_x, m_position_y, 0.0f, 0.0f, m_rotation);
-	a_renderer->drawCircle(m_position_x, m_position_y, m_radius, 10);
+	a_renderer->drawSprite(m_texture, m_position_x, m_position_y, 0, 0, m_rotation, 0, 0.5f, 0.5f);
+	a_renderer->drawCircle(m_position_x, m_position_y, m_radius, 0);
 }
 

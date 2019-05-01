@@ -58,63 +58,35 @@ void aieProject2D1App::update(float deltaTime) {
 	float player_y = m_player->get_position_y();
 	float player_rot = m_player->get_rotation();
 
-	
 
-	float player_speed = 0;
+	// For now
+	float player_speed = 400.0f;
+	float bullet_speed = 800.0f;
 
-	float s = sinf(player_rot) * player_speed;
-	float c = cosf(player_rot) * player_speed;
-	x = s * deltaTime;
-	y = c * deltaTime;
+	// Bullet conditions
+	bool is_shooting = false;
+	float cooldown = 0.0f;
+	cooldown += deltaTime;
+	float delay = 0.2f;
+
+	float bullet_x = player_x;
+	float bullet_y = player_y;
+	float bullet_rot = player_rot;
+
 
 	const float pi = 3.14158f;
-
-	/*    Bullet Stuff Start */
-
-	/*if (input->isKeyDown(aie::INPUT_KEY_SPACE))
-	{
-
-	}
-	*/
-	/*    Bullet stuff end    */
-
-	
 
 	// Direction inputs
 	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		while (player_speed < 500)
-		{
-			player_speed += 50;
-			if (player_speed > 500)
-			{
-				player_speed = 500;
-			}
-		}
-	}
-	else
-	{
-		while (player_speed > 0) 
-		{
-			player_speed -= 5;
-			if (player_speed < 0)
-			{
-				player_speed = 0;
-			}
-		}
+		player_x += cos(-player_rot - pi * 0.5f) * player_speed * deltaTime;
+		player_y += -sin(-player_rot - pi * 0.5f) * player_speed * deltaTime;
 	}
 	
-
 	if (input->isKeyDown(aie::INPUT_KEY_S) && speed > 0)
 	{
-		if (player_speed > 0)
-		{
-			player_speed -= 25;
-			if (player_speed < 0)
-			{
-				player_speed = 0;
-			}
-		}
+		player_x -= cos(-player_rot - pi * 0.5) * player_speed * deltaTime;
+		player_y -= -sin(-player_rot - pi * 0.5) * player_speed * deltaTime;
 	}
 	
 
@@ -128,8 +100,22 @@ void aieProject2D1App::update(float deltaTime) {
 		player_rot += -pi * deltaTime;
 	}
 
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE) && cooldown > delay)
+	{
+		is_shooting = true;
+		{
+			m_projectile->set_position(bullet_x, bullet_y);
+			m_projectile->set_rotation(bullet_rot);
+		}
+	}
+	else
+	{
+		is_shooting = false;
+	}
 
-	/*m_2dRenderer->setCameraPos(cam_posX, cam_posY);*/
+
+	m_player->set_position(player_x, player_y);
+	m_player->set_rotation(player_rot);
 	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -146,9 +132,8 @@ void aieProject2D1App::draw() {
 
 	// draw your stuff here!
 
-
 	// Background
-	m_2dRenderer->drawSprite(m_world_track, 0, 0, 1280, 720, 0, 50, 0, 0); 
+	m_2dRenderer->drawSprite(m_world_track, 0, 0, 1280, 720, 0, 100, 0, 0); 
 
 	// Sprite
 	m_2dRenderer->setUVRect(0, 0, 1, 1);

@@ -28,9 +28,9 @@ public:
 private:
 
 	float m_rotation = 0.0f;
-	float m_position_x = 0.0f;
-	float m_position_y = 0.0f;
-	float m_radius = 0.0f;
+	float m_position_x = 640.0f;
+	float m_position_y = 360.0f;
+	float m_radius = 1.0f;
 
 	aie::Texture* m_texture = nullptr;
 };
