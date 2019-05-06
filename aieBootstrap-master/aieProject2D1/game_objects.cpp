@@ -1,6 +1,4 @@
 #include "game_objects.h"
-#include "Renderer2D.h"
-#include "Texture.h"
 
 game_objects::game_objects(aie::Texture* const a_texture)
 {
@@ -26,6 +24,8 @@ void game_objects::set_radius(float a_radius)
 	m_radius = a_radius;
 }
 
+
+
 			// Getters //
 
 float game_objects::get_rotation() const
@@ -47,6 +47,8 @@ float game_objects::get_radius() const
 {
 	return m_radius;
 }
+
+
 
 void game_objects::draw(aie::Renderer2D* a_renderer)
 {

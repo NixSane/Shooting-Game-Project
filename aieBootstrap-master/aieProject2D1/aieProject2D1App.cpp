@@ -74,14 +74,11 @@ void aieProject2D1App::update(float deltaTime) {
 	float bullet_speed = 800.0f;
 
 	// Bullet conditions
-	bool is_shooting = false;
-	float cooldown = 0.0f;
-	cooldown += deltaTime;
-	float delay = 0.2f;
-
 	float bullet_x = player_x;
 	float bullet_y = player_y;
 	float bullet_rot = player_rot;
+	
+	bool shoot = false;
 
 	const float pi = 3.14158f;
 
@@ -102,8 +99,8 @@ void aieProject2D1App::update(float deltaTime) {
 	
 	if (input->isKeyDown(aie::INPUT_KEY_S) && speed > 0)
 	{
-		player_x -= cos(-player_rot - pi * 0.5) * player_speed * deltaTime;
-		player_y -= -sin(-player_rot - pi * 0.5) * player_speed * deltaTime;
+		player_x -= cos(-player_rot - pi * 0.5f) * player_speed * deltaTime;
+		player_y -= -sin(-player_rot - pi * 0.5f) * player_speed * deltaTime;
 	}
 	
 
@@ -117,17 +114,16 @@ void aieProject2D1App::update(float deltaTime) {
 		player_rot += -pi * deltaTime;
 	}
 
-	/*if (input->isKeyDown(aie::INPUT_KEY_SPACE) && cooldown > delay)
-	{
-		is_shooting = true;
-	}
-	else
-	{
-		is_shooting = false;
-	}*/
+	// Shooting key
 
+	//if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	//{
+	//	shoot = true;
+	//	if (shoot)
+	//	{
 
-	// Bar test
+	//	}
+	//}
 
 	m_player->set_position(player_x, player_y);
 	m_player->set_rotation(player_rot);

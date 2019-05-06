@@ -1,5 +1,5 @@
 #include "player.h"
-#include "game_objects.h"
+
 
 
 player::player()
@@ -10,7 +10,7 @@ player::player()
 }
 
 player::player(float a_speed, int a_lives) :
-	m_speed(a_speed), m_lives(a_speed)
+	m_speed(a_speed), m_lives(a_lives)
 {
 }
 
