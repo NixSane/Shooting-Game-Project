@@ -7,11 +7,11 @@ bullet::bullet()
 	// Default
 	m_delay = 20.0f;
 	m_is_shooting = false;
-	m_cooldown = 5.0f;
+	
 }
 
-bullet::bullet(bool a_shoot, float a_delay, float a_cooldown) :
-	m_is_shooting(a_shoot), m_delay(a_delay), m_cooldown(a_cooldown)
+bullet::bullet(bool a_shoot, float a_delay) :
+	m_is_shooting(a_shoot), m_delay(a_delay)
 {
 }
 
@@ -30,15 +30,6 @@ void bullet::set_delay(float a_delay)
 	m_delay = a_delay;
 }
 
-void bullet::set_cooldown(float a_cooldown)
-{
-	m_cooldown = a_cooldown;
-}
-
-float bullet::get_cooldown() const
-{
-	return m_cooldown;
-}
 
 float bullet::get_delay() const
 {

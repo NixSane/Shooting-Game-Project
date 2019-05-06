@@ -100,19 +100,16 @@ void aieProject2D1App::update(float deltaTime) {
 		player_rot += -pi * deltaTime;
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE) && cooldown > delay)
+	/*if (input->isKeyDown(aie::INPUT_KEY_SPACE) && cooldown > delay)
 	{
 		is_shooting = true;
-		{
-			m_projectile->set_position(bullet_x, bullet_y);
-			m_projectile->set_rotation(bullet_rot);
-		}
 	}
 	else
 	{
 		is_shooting = false;
-	}
+	}*/
 
+	
 
 	m_player->set_position(player_x, player_y);
 	m_player->set_rotation(player_rot);
@@ -139,9 +136,6 @@ void aieProject2D1App::draw() {
 	m_2dRenderer->setUVRect(0, 0, 1, 1);
 
 	m_player->draw(m_2dRenderer);
-	//m_2dRenderer->drawSprite(m_ship, x, y, 127, 130, rotation, 0, 0.5f, 0.3f);
-	
-	/* m_2dRenderer->drawLine(100, 100, 200, 200, 5, 5); */
 	
 	// output some text, uses the last used colour
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
