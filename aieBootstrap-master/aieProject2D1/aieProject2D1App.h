@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "game_objects.h"
+#include "button.h"
+#include "Bar.h"
 
 class aieProject2D1App : public aie::Application {
 public:
@@ -37,6 +39,10 @@ protected:
 
 	game_objects*		m_player;
 	game_objects*		m_projectile;
+
+	button*				m_button;
+
+	Bar*				m_bar;
 	
 	float m_timer;
 };

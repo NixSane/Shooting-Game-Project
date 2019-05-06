@@ -166,7 +166,9 @@
   <ItemGroup>
     <ClCompile Include="aieProject2D1App.cpp" />
     <ClCompile Include="asteroid.cpp" />
+    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="game_objects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -174,7 +176,9 @@
   <ItemGroup>
     <ClInclude Include="aieProject2D1App.h" />
     <ClInclude Include="asteroid.h" />
+    <ClInclude Include="Bar.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="button.h" />
     <ClInclude Include="game_objects.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

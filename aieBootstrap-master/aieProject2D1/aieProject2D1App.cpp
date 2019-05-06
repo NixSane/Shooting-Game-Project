@@ -3,6 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include "bullet.h"
+#include <iostream>
 
 
 aieProject2D1App::aieProject2D1App() {
@@ -28,8 +29,15 @@ bool aieProject2D1App::startup() {
 	m_ship = new aie::Texture("./textures/ship_2 - Copy.png");
 	m_bullet = new aie::Texture("./textures/bullet.png");
 
+	// Game Objects that are part of gameplay
 	m_player = new game_objects(m_ship);
 	m_projectile = new game_objects(m_bullet);
+
+	// Button
+	m_button = new button("Pause", 1180, 680, 120, 50);
+
+	// Bar | (left to right, bottom to top, width, height)
+	m_bar = new Bar(140, 690, 200, 20);
 
 	m_timer = 0;
 
@@ -44,6 +52,8 @@ void aieProject2D1App::shutdown() {
 	delete m_ship;
 	delete m_world_track;
 	delete m_bullet;
+	delete m_button;
+	delete m_bar;
 }
 
 void aieProject2D1App::update(float deltaTime) {
@@ -73,8 +83,15 @@ void aieProject2D1App::update(float deltaTime) {
 	float bullet_y = player_y;
 	float bullet_rot = player_rot;
 
-
 	const float pi = 3.14158f;
+
+	// Button inputs
+	if (m_button->Update())
+	{
+		// Replace this with whatever the button should do
+		std::cout << "Button clicked" << std::endl;
+	}
+
 
 	// Direction inputs
 	if (input->isKeyDown(aie::INPUT_KEY_W))
@@ -109,7 +126,8 @@ void aieProject2D1App::update(float deltaTime) {
 		is_shooting = false;
 	}*/
 
-	
+
+	// Bar test
 
 	m_player->set_position(player_x, player_y);
 	m_player->set_rotation(player_rot);
@@ -127,7 +145,11 @@ void aieProject2D1App::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
-	// draw your stuff here!
+	// Buttons
+	m_button->Draw(m_2dRenderer);
+
+	// Bars
+	m_bar->Draw(m_2dRenderer);
 
 	// Background
 	m_2dRenderer->drawSprite(m_world_track, 0, 0, 1280, 720, 0, 100, 0, 0); 
