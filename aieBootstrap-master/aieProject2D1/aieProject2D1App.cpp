@@ -116,14 +116,26 @@ void aieProject2D1App::update(float deltaTime) {
 
 	// Shooting key
 
-	//if (input->isKeyDown(aie::INPUT_KEY_SPACE))
-	//{
-	//	shoot = true;
-	//	if (shoot)
-	//	{
+	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+		bullet_x += cos(-bullet_rot - pi * 0.5f) * bullet_speed * deltaTime;
+		bullet_y += -sin(-bullet_rot - pi * 0.5f) * bullet_speed * deltaTime;
+		m_projectile->set_position(bullet_x, bullet_y);
+		m_projectile->set_rotation(bullet_rot);
+	}
 
-	//	}
-	//}
+	// Wrap position around the screen
+	player_x = fmod(player_x, (float)getWindowWidth());
+	if (player_x < 0)
+	{
+		player_x += getWindowWidth();
+	}
+	player_y = fmod(player_y, (float)getWindowHeight());
+	if (player_y < 0)
+	{
+		player_y += getWindowHeight();
+	}
+	
 
 	m_player->set_position(player_x, player_y);
 	m_player->set_rotation(player_rot);
@@ -143,6 +155,9 @@ void aieProject2D1App::draw() {
 
 	// Buttons
 	m_button->Draw(m_2dRenderer);
+
+	// Bullets
+	m_projectile->draw(m_2dRenderer);
 
 	// Bars
 	m_bar->Draw(m_2dRenderer);

@@ -1,11 +1,11 @@
 #pragma once
 #include "game_objects.h"
+#include "bullet.h"
 
-class player 
+class player
 {
 public:
 	player();
-	player(float a_speed, int a_lives);
 	~player();
 
 
@@ -13,12 +13,7 @@ public:
 
 	float get_speed() const;
 
-	void set_lives(int a_lives);
-
-	int get_lives() const;
-
 private:
 	float m_speed = 0.0f;
-	int m_lives = 5;
 };
 

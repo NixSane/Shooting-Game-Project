@@ -48,8 +48,6 @@ float game_objects::get_radius() const
 	return m_radius;
 }
 
-
-
 void game_objects::draw(aie::Renderer2D* a_renderer)
 {
 	a_renderer->drawSprite(m_texture, m_position_x, m_position_y, 0, 0, m_rotation, 0, 0.5f, 0.5f);
