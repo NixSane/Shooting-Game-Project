@@ -32,7 +32,7 @@ void button::Draw(aie::Renderer2D* renderer)
 	float text_width = m_font->getStringWidth(m_button_text);
 	float text_height = m_font->getStringHeight(m_button_text);
 	float centred_pos_x = m_pos_x - (text_width * 0.5f) + 2;
-	float centred_pos_y = m_pos_y - (text_height * 0.5) + 5;
+	float centred_pos_y = m_pos_y - (text_height * 0.5f) + 5;
 
 	// Draw the text on button
 	renderer->drawText(m_font, m_button_text, centred_pos_x, centred_pos_y);

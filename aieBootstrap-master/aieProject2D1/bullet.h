@@ -7,24 +7,18 @@
 class bullet 
 {
 public:
-	bullet();
+	bullet(float a_pos_x, float a_pos_y, float a_aim, float a_velocity, aie::Texture* a_texture);
 	~bullet();
 
-	
-	
-	void set_delay(float a_delay);
-	float get_delay() const;
-
-	
-
-	
-
+	void update(float deltaTime);
+	void draw(aie::Renderer2D* a_renderer);
 
 private:
+	aie::Texture* m_bullet_texture;
 
-	float m_delay;
-	float m_pos_x;
-	float m_pos_y;
-
+	float b_pos_x;
+	float b_pos_y;
+	float m_aim;
+	float m_velocity;
 };
 

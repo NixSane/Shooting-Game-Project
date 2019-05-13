@@ -1,8 +1,9 @@
 #include "game_objects.h"
 
-game_objects::game_objects(aie::Texture* const a_texture)
+
+game_objects::game_objects(const char* a_texture)
 {
-	m_texture = a_texture;
+	m_texture = new aie::Texture(a_texture);
 }
 
 
@@ -24,6 +25,10 @@ void game_objects::set_radius(float a_radius)
 	m_radius = a_radius;
 }
 
+void game_objects::set_speed(float a_speed) 
+{
+	m_distance = a_speed;
+}
 
 
 			// Getters //
@@ -47,6 +52,13 @@ float game_objects::get_radius() const
 {
 	return m_radius;
 }
+
+float game_objects::get_speed() const
+{
+	return m_distance;
+}
+
+
 
 void game_objects::draw(aie::Renderer2D* a_renderer)
 {

@@ -5,6 +5,10 @@
 #include "game_objects.h"
 #include "button.h"
 #include "Bar.h"
+#include <list>
+
+class player;
+class bullet;
 
 class aieProject2D1App : public aie::Application {
 public:
@@ -20,6 +24,10 @@ public:
 
 	float playerPosX = 640;
 	float playerPosY = 360;
+
+	float bullet_x = 0;
+	float bullet_y = 0;
+	float bullet_rot = 0;
 
 	float x = 640.0f, y = 360.0f;
 	float rotation = 0;
@@ -37,8 +45,8 @@ protected:
 	aie::Texture*		m_world_track;
 	aie::Texture*		m_bullet;
 
-	game_objects*		m_player;
-	game_objects*		m_projectile;
+	player*				m_player;
+	std::list<bullet*>	m_projectile;
 
 	button*				m_button;
 

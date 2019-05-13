@@ -30,8 +30,7 @@ bool aieProject2D1App::startup() {
 	m_bullet = new aie::Texture("./textures/bullet.png");
 
 	// Game Objects that are part of gameplay
-	m_player = new game_objects(m_ship);
-	m_projectile = new game_objects(m_bullet);
+	m_player = new player("./textures/ship_2 - Copy.png", 640.0f, 360.0f, 0.0f, 200.0f);
 
 	// Button
 	m_button = new button("Pause", 1180, 680, 120, 50);
@@ -54,6 +53,7 @@ void aieProject2D1App::shutdown() {
 	delete m_bullet;
 	delete m_button;
 	delete m_bar;
+	delete m_player;
 }
 
 void aieProject2D1App::update(float deltaTime) {
@@ -63,24 +63,20 @@ void aieProject2D1App::update(float deltaTime) {
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
-	// Ship movement numbers
-	float player_x = m_player->get_position_x();
-	float player_y = m_player->get_position_y();
-	float player_rot = m_player->get_rotation();
+	// Ship
+	m_player->update(deltaTime);
 
-
-	// For now
-	float player_speed = 400.0f;
-	float bullet_speed = 800.0f;
-
-	// Bullet conditions
-	float bullet_x = player_x;
-	float bullet_y = player_y;
-	float bullet_rot = player_rot;
+	if (m_player->is_shooting())
+	{
+		m_projectile.push_back(new bullet(m_player->get_pos_x(), m_player->get_pos_y(), m_player->get_rot(), 500.0f, m_bullet));
+	}
+	for (std::list<bullet*>::iterator iter = m_projectile.begin(); iter != m_projectile.end(); iter++)
+	{
+		(*iter)->update(deltaTime);
+	}
 	
-	bool shoot = false;
 
-	const float pi = 3.14158f;
+	// Ship
 
 	// Button inputs
 	if (m_button->Update())
@@ -89,56 +85,8 @@ void aieProject2D1App::update(float deltaTime) {
 		std::cout << "Button clicked" << std::endl;
 	}
 
-
-	// Direction inputs
-	if (input->isKeyDown(aie::INPUT_KEY_W))
-	{
-		player_x += cos(-player_rot - pi * 0.5f) * player_speed * deltaTime;
-		player_y += -sin(-player_rot - pi * 0.5f) * player_speed * deltaTime;
-	}
+	m_player->update(deltaTime);
 	
-	if (input->isKeyDown(aie::INPUT_KEY_S) && speed > 0)
-	{
-		player_x -= cos(-player_rot - pi * 0.5f) * player_speed * deltaTime;
-		player_y -= -sin(-player_rot - pi * 0.5f) * player_speed * deltaTime;
-	}
-	
-
-	if (input->isKeyDown(aie::INPUT_KEY_A))
-	{
-		player_rot += pi * deltaTime;
-	}
-
-	if (input->isKeyDown(aie::INPUT_KEY_D))
-	{
-		player_rot += -pi * deltaTime;
-	}
-
-	// Shooting key
-
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
-	{
-		bullet_x += cos(-bullet_rot - pi * 0.5f) * bullet_speed * deltaTime;
-		bullet_y += -sin(-bullet_rot - pi * 0.5f) * bullet_speed * deltaTime;
-		m_projectile->set_position(bullet_x, bullet_y);
-		m_projectile->set_rotation(bullet_rot);
-	}
-
-	// Wrap position around the screen
-	player_x = fmod(player_x, (float)getWindowWidth());
-	if (player_x < 0)
-	{
-		player_x += getWindowWidth();
-	}
-	player_y = fmod(player_y, (float)getWindowHeight());
-	if (player_y < 0)
-	{
-		player_y += getWindowHeight();
-	}
-	
-
-	m_player->set_position(player_x, player_y);
-	m_player->set_rotation(player_rot);
 	
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -156,18 +104,21 @@ void aieProject2D1App::draw() {
 	// Buttons
 	m_button->Draw(m_2dRenderer);
 
-	// Bullets
-	m_projectile->draw(m_2dRenderer);
-
 	// Bars
 	m_bar->Draw(m_2dRenderer);
+
+	// Bullets
+	// Bullets
+	for (std::list<bullet*>::iterator iter = m_projectile.begin(); iter != m_projectile.end(); iter++)
+	{
+		(*iter)->draw(m_2dRenderer);
+	}
 
 	// Background
 	m_2dRenderer->drawSprite(m_world_track, 0, 0, 1280, 720, 0, 100, 0, 0); 
 
 	// Sprite
 	m_2dRenderer->setUVRect(0, 0, 1, 1);
-
 	m_player->draw(m_2dRenderer);
 	
 	// output some text, uses the last used colour
