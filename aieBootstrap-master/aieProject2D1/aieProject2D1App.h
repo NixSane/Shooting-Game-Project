@@ -9,6 +9,7 @@
 
 class player;
 class bullet;
+class Enemy;
 
 class aieProject2D1App : public aie::Application {
 public:
@@ -47,10 +48,14 @@ protected:
 
 	player*				m_player;
 	std::list<bullet*>	m_projectile;
+	std::list<Enemy*>	m_enemy;
 
 	button*				m_button;
 
 	Bar*				m_bar;
+
+	unsigned int m_wave, m_wave_enemies, m_spawned_enemies, m_enemy_cap, m_spawn_increase;
 	
 	float m_timer;
+	float  m_spawn_timer;
 };

@@ -3,7 +3,10 @@
 #include "Font.h"
 #include "Input.h"
 #include "bullet.h"
+#include "Enemy.h"
 #include <iostream>
+#include <random>
+#include <ctime>
 
 
 aieProject2D1App::aieProject2D1App() {
@@ -22,12 +25,12 @@ bool aieProject2D1App::startup() {
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	m_faceTexture = new aie::Texture("./textures/car2.png");
+	
 	m_background = new aie::Texture("./textures/background.png");
-	m_sunny_road = new aie::Texture("./textures/background_sunny.png");
 	m_world_track = new aie::Texture("./textures/bg_world_track.png");
 	m_ship = new aie::Texture("./textures/ship_2 - Copy.png");
 	m_bullet = new aie::Texture("./textures/bullet.png");
+	m_faceTexture = new aie::Texture("./textures/Face.png");
 
 	// Game Objects that are part of gameplay
 	m_player = new player("./textures/ship_2 - Copy.png", 640.0f, 360.0f, 0.0f, 200.0f);
@@ -40,14 +43,23 @@ bool aieProject2D1App::startup() {
 
 	m_timer = 0;
 
+	// Waves
+	m_wave = 1;
+	m_spawn_increase = 10;
+	m_wave_enemies = m_wave * m_spawn_increase;
+	m_spawned_enemies = 0;
+	m_enemy_cap = 200;
+	m_spawn_timer = 0;
+
+	srand(time(NULL));
+
 	return true;
 }
 
-void aieProject2D1App::shutdown() {
-
+void aieProject2D1App::shutdown() 
+{
 	delete m_font;
 	delete m_2dRenderer;
-	delete m_faceTexture;
 	delete m_ship;
 	delete m_world_track;
 	delete m_bullet;
@@ -70,19 +82,52 @@ void aieProject2D1App::update(float deltaTime) {
 	{
 		m_projectile.push_back(new bullet(m_player->get_pos_x(), m_player->get_pos_y(), m_player->get_rot(), 500.0f, m_bullet));
 	}
+
 	for (std::list<bullet*>::iterator iter = m_projectile.begin(); iter != m_projectile.end(); iter++)
 	{
+		bullet* bullet = *iter;
+
 		(*iter)->update(deltaTime);
 	}
-	
-
 	// Ship
+
+	// Enemy Update
+	for (std::list<Enemy*>::iterator iter = m_enemy.begin(); iter != m_enemy.end(); iter++)
+	{
+		Enemy *enemy = *iter;
+
+		enemy->update(deltaTime);
+
+		if (enemy->is_alive() == false)
+		{
+			delete enemy;
+			iter = m_enemy.erase(iter);
+		}
+	}
+
+	//================================
+	// Spawning for Enemies
+	//================================
+		
+	if (m_spawned_enemies < m_wave_enemies)
+	{
+		m_spawn_timer += deltaTime;
+		if (m_spawn_timer > SPAWN_DELAY)
+		{
+			int y_pos = MIN_Y_SPAWN + (rand() % (MAX_Y_SPAWN - MIN_Y_SPAWN));
+			
+			m_enemy.push_front(new Enemy(1100.0f, y_pos, 20.0f, m_faceTexture));
+
+			m_spawned_enemies++;
+			m_spawn_timer = 0;
+		}
+	}
+		
 
 	// Button inputs
 	if (m_button->Update())
 	{
-		// Replace this with whatever the button should do
-		std::cout << "Button clicked" << std::endl;
+		
 	}
 
 	m_player->update(deltaTime);
@@ -101,13 +146,16 @@ void aieProject2D1App::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
-	// Buttons
-	m_button->Draw(m_2dRenderer);
+	// Enemy
+	for (std::list<Enemy*>::iterator iter = m_enemy.begin(); iter != m_enemy.end(); iter++)
+	{
+		(*iter)->draw(m_2dRenderer);
+	}
 
 	// Bars
 	m_bar->Draw(m_2dRenderer);
 
-	// Bullets
+	
 	// Bullets
 	for (std::list<bullet*>::iterator iter = m_projectile.begin(); iter != m_projectile.end(); iter++)
 	{

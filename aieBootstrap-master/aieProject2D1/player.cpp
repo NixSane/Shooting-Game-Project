@@ -10,7 +10,7 @@ player::player(const char* a_text, float a_pos_x, float a_pos_y, float a_rot, fl
 	m_rotation = a_rot;
 	m_speed = a_speed;
 	pi = 3.14158f;
-	m_radius = 0.1f;
+	m_radius = 80.0f;
 	m_cooldown = 0.0f;
 }
 
@@ -37,6 +37,8 @@ float player::get_rot() const
 {
 	return m_rotation;
 }
+
+
 
 void player::update(float deltaTime)
 {
@@ -72,6 +74,6 @@ void player::update(float deltaTime)
 void player::draw(aie::Renderer2D* a_renderer)
 {
 	a_renderer->drawSprite(m_texture_ship, m_position_x, m_position_y, 0, 0, m_rotation, 0, 0.5f, 0.5f);
-	a_renderer->drawCircle(m_position_x, m_position_y, m_radius, 0);
+	a_renderer->drawCircle(m_position_x, m_position_y, m_radius, 0.1f);
 }
 

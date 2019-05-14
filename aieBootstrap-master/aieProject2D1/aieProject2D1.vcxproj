@@ -169,6 +169,7 @@
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="game_objects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -179,6 +180,8 @@
     <ClInclude Include="Bar.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="button.h" />
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="game_objects.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

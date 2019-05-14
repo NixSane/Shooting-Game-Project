@@ -13,6 +13,9 @@ public:
 	void update(float deltaTime);
 	void draw(aie::Renderer2D* a_renderer);
 
+	float get_pos_x() { return b_pos_x; }
+	float get_pos_y() { return b_pos_y; }
+
 private:
 	aie::Texture* m_bullet_texture;
 

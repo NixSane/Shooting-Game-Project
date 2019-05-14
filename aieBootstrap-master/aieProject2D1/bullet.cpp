@@ -23,7 +23,6 @@ void bullet::update(float deltaTime)
 
 void bullet::draw(aie::Renderer2D* a_renderer)
 {
-
 	a_renderer->drawSprite(m_bullet_texture, b_pos_x, b_pos_y, 20.0f, 20.0f, m_aim, 0, 0.5f, 0.5f);
 }
 
