@@ -4,24 +4,19 @@
 
 
 
-class bullet 
+class bullet : public game_objects
 {
 public:
-	bullet(float a_pos_x, float a_pos_y, float a_aim, float a_velocity, aie::Texture* a_texture);
+	bullet(float a_pos_x, float a_pos_y, float a_aim, float a_velocity);
 	~bullet();
 
 	void update(float deltaTime);
 	void draw(aie::Renderer2D* a_renderer);
 
-	float get_pos_x() { return b_pos_x; }
-	float get_pos_y() { return b_pos_y; }
 
 private:
-	aie::Texture* m_bullet_texture;
-
-	float b_pos_x;
-	float b_pos_y;
-	float m_aim;
+	
+	unsigned int m_damage;
 	float m_velocity;
 };
 

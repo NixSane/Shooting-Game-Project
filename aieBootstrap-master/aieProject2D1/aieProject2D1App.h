@@ -2,14 +2,15 @@
 
 #include "Application.h"
 #include "Renderer2D.h"
-#include "game_objects.h"
 #include "button.h"
 #include "Bar.h"
 #include <list>
 
+class game_objects;
 class player;
 class bullet;
 class Enemy;
+class button;
 
 class aieProject2D1App : public aie::Application {
 public:
